@@ -1,0 +1,13 @@
+# Dirs
+.vscode
+.idea
+__pycache__
+
+# Files
+*sqlite3
+*.pyc
+
+tmp
+/venv/
+
+#some text to make pull request
