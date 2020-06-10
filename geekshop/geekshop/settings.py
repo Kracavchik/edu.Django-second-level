@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import json
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'authnapp',
     'basketapp',
     'adminapp',
+    "social_django",
 ]
 
 MIDDLEWARE = [
@@ -159,3 +161,34 @@ EMAIL_HOST_PASSWORD = None
 # Email as file
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = "tmp/email-messages/"
+
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "social_core.backends.vk.VKOAuth2"
+)
+
+SOCIAL_AUTH_URL_NAMESPACE = "social"
+
+# Secret keys file location ./geekshop/VK.json
+with open("./geekshop/VK.json", "r") as f:
+    VK = json.load(f)
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = VK["SOCIAL_AUTH_VK_OAUTH2_APPID"]
+SOCIAL_AUTH_VK_OAUTH2_SECRET = VK["SOCIAL_AUTH_VK_OAUTH2_KEY"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
