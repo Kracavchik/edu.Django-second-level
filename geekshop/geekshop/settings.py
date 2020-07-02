@@ -34,9 +34,11 @@ INSTALLED_APPS = [
     "ordersapp",
     "debug_toolbar",
     "template_profiler_panel",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
+    # "django.middleware.cache.UpdateCacheMiddleware",  # for entire site caching
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -46,7 +48,23 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "social_django.middleware.SocialAuthExceptionMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    # "django.middleware.cache.FetchFromCacheMiddleware",  # for entire site caching
 ]
+
+CACHE_MIDDLEWARE_ALIAS = "default"
+CACHE_MIDDLEWARE_SECONDS = 120
+CACHE_MIDDLEWARE_KEY_PREFIX = "geekbrains"
+
+# Be carefull if you have Windows! Install Memcached before run project!
+#     https://www.ubergizmo.com/how-to/install-memcached-windows/
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.memcached.MemcachedCache",
+        "LOCATION": "127.0.0.1:11211",
+    }
+}
+
+LOW_CACHE = True
 
 ROOT_URLCONF = "geekshop.urls"
 
@@ -85,6 +103,7 @@ DATABASES = {
         "HOST": "localhost",
     }
 }
+
 if DEBUG:
     DATABASES = {
         "default": {
@@ -98,20 +117,7 @@ if DEBUG:
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
 if not DEBUG:
-    AUTH_PASSWORD_VALIDATORS = [
-        {
-            "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-        },
-        {
-            "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-        },
-        {
-            "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-        },
-        {
-            "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-        },
-    ]
+    AUTH_PASSWORD_VALIDATORS = []
 else:
     # Set simple password for debug
     AUTH_PASSWORD_VALIDATORS = []
@@ -137,6 +143,10 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+
+# For production use this option and command:
+#     python manage.py collectstatic
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # Media files
 MEDIA_URL = "/media/"
@@ -187,7 +197,7 @@ SOCIAL_AUTH_URL_NAMESPACE = "social"
 # SOCIAL_AUTH_VK_OAUTH2_SECRET = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 
 # Load settings from file
-with open("./VK.json", "r") as f:
+with open("./vk.json", "r") as f:
     VK = json.load(f)
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = VK["SOCIAL_AUTH_VK_OAUTH2_APPID"]
@@ -211,6 +221,10 @@ SOCIAL_AUTH_PIPELINE = (
     "social_core.pipeline.user.user_details",
 )
 
+
+# INTERNAL_IPS = ["127.0.0.1"]
+
+# Debgu tool bar settings
 if DEBUG:
 
     def show_toolbar(request):
