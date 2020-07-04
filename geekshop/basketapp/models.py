@@ -30,7 +30,7 @@ class Basket(models.Model):
         return sum(list(map(lambda x: x.product_cost, _items)))
 
     @staticmethod
-    def get_items(pk):
+    def get_item(pk):
         return get_object_or_404(Basket, pk=pk)
 
     # @staticmethod

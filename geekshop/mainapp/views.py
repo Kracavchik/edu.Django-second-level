@@ -85,18 +85,10 @@ def get_products_in_category_orederd_by_price(pk):
         return Product.objects.filter(category__pk=pk, is_active=True, category__is_active=True).order_by("price")
 
 
-class Fact(object):
-    def get_factorial(self):
-        fact = 1
-        for i in range(1, 15000 + 1):
-            fact = fact * i
-        return fact
-
-
 def main(request):
     title = "главная"
     products = get_products()[:3]
-    content = {"title": title, "products": products, "media_url": settings.MEDIA_URL, "fact": Fact}
+    content = {"title": title, "products": products, "media_url": settings.MEDIA_URL}
     return render(request, "mainapp/index.html", content)
 
 

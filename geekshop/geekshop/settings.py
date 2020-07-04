@@ -98,8 +98,8 @@ DATABASES = {
     "default": {
         "NAME": "geekshop",
         "ENGINE": "django.db.backends.postgresql",
-        "USER": "django",
-        "PASSWORD": "geekbrains",
+        "USER": "postgres",
+        "PASSWORD": "postgres",
         "HOST": "localhost",
     }
 }
@@ -117,7 +117,20 @@ if DEBUG:
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
 if not DEBUG:
-    AUTH_PASSWORD_VALIDATORS = []
+    AUTH_PASSWORD_VALIDATORS = [
+        {
+            "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        },
+        {
+            "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+        },
+        {
+            "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+        },
+        {
+            "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+        },
+    ]
 else:
     # Set simple password for debug
     AUTH_PASSWORD_VALIDATORS = []
@@ -224,7 +237,7 @@ SOCIAL_AUTH_PIPELINE = (
 
 # INTERNAL_IPS = ["127.0.0.1"]
 
-# Debgu tool bar settings
+# Debug tool bar settings
 if DEBUG:
 
     def show_toolbar(request):
