@@ -1,0 +1,83 @@
+[
+    {
+        "model": "ordersapp.orderitem",
+        "pk": 1,
+        "fields": {
+            "order": 1,
+            "product": 2,
+            "quantity": 2
+        }
+    },
+    {
+        "model": "ordersapp.orderitem",
+        "pk": 2,
+        "fields": {
+            "order": 1,
+            "product": 6,
+            "quantity": 2
+        }
+    },
+    {
+        "model": "ordersapp.orderitem",
+        "pk": 3,
+        "fields": {
+            "order": 1,
+            "product": 1,
+            "quantity": 2
+        }
+    },
+    {
+        "model": "ordersapp.orderitem",
+        "pk": 4,
+        "fields": {
+            "order": 3,
+            "product": 10,
+            "quantity": 4
+        }
+    },
+    {
+        "model": "ordersapp.orderitem",
+        "pk": 5,
+        "fields": {
+            "order": 3,
+            "product": 1,
+            "quantity": 2
+        }
+    },
+    {
+        "model": "ordersapp.orderitem",
+        "pk": 6,
+        "fields": {
+            "order": 3,
+            "product": 9,
+            "quantity": 1
+        }
+    },
+    {
+        "model": "ordersapp.orderitem",
+        "pk": 7,
+        "fields": {
+            "order": 3,
+            "product": 7,
+            "quantity": 1
+        }
+    },
+    {
+        "model": "ordersapp.orderitem",
+        "pk": 11,
+        "fields": {
+            "order": 4,
+            "product": 1,
+            "quantity": 1
+        }
+    },
+    {
+        "model": "ordersapp.orderitem",
+        "pk": 14,
+        "fields": {
+            "order": 5,
+            "product": 1,
+            "quantity": 1
+        }
+    }
+]
